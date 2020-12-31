@@ -40,6 +40,3 @@ class LinkedList:
         """Check if list contains homogoneous values."""
         homogoneous = False
         return homogoneous
-
-    
-    
