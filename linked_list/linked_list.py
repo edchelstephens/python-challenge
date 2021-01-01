@@ -29,15 +29,20 @@ class LinkedList:
 
     def insert(self, head, item):
         """Inserts item at the last node of the linked list."""
-        node = Node(item)
+        try:
+            node = Node(item)
 
-        if head is None:
-            head = node
-        else:
-            tail = self.get_tail(head)
-            tail.next = node
+            if head is None:
+                head = node
+            else:
+                tail = self.get_tail(head)
+                tail.next = node
 
-        return head
+            return head
+        except AttributeError as attribute_error:
+            raise attribute_error
+        except Exception as exc:
+            raise exc
     
     def get_tail(self, head):
         """Get tail node of linked list from head."""
@@ -77,12 +82,56 @@ class LinkedList:
             raise attribute_error
         
     def reverse_list(self, head):
-        """Reverse the linked list from head."""
-        return head
+        """Reverse the linked list from head.
+        
+        Expensive.
+        We do this by getting the list of items from the linked list.
+        Reverse the items, delete the old list instance and
+        create a new linked list instance of the reversed items.
+        """
+        try:
+            items = self.get_list(head)
+            items.reverse()
+
+            # delete the old list
+            del head 
+
+            # create the new reversed list
+            reversed_list = LinkedList(items)
+            head = reversed_list.head
+
+            return head
+        except TypeError as type_error:
+            raise type_error
+        except Exception as exc:
+            raise exc
 
     def sort_list(self, head):
-        """Sort list by node values if values are sortable."""
-        return head
+        """Sort list by node values if values are sortable.
+        
+        Expensive.
+        We do this by getting the list of items from the linked list.
+        Sort the items, delete the old list instance and
+        create a new linked list instance of the reversed items.
+        """
+
+        try:
+            if self.is_homogenuous(head):
+                items = self.get_list(head)
+                items.sort()
+
+                # delete old list
+                del head
+
+                # create the new sorted list
+                sorted_list = LinkedList(items)
+                head = sorted_list.head
+
+            return head
+        except TypeError as type_error:
+            raise TypeError
+        except Exception as exc:
+            raise exc
 
     def is_empty(self, head):
         """Check if list head is pointing to an empty linked list."""
