@@ -68,4 +68,3 @@ class NodeTestCase(unittest.TestCase):
 
         self.assertEqual(from_method, expected)
         self.assertEqual(from_repr, expected)
-        
