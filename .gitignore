@@ -1,1 +1,3 @@
 instructions.py
+__pycache__
+*.pyc
