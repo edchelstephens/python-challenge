@@ -76,27 +76,26 @@ class LinkedList:
         try:
             linked_list_items = self.get_list(head)
             list_copy = LinkedList(linked_list_items)
-            
-            return list_copy
+            list_copy_head = list_copy.head
+
+            return list_copy_head
         except AttributeError as attribute_error:
             raise attribute_error
         
     def reverse_list(self, head):
         """Reverse the linked list from head.
-        
-        Expensive.
-        We do this by getting the list of items from the linked list.
-        Reverse the items, delete the old list instance and
-        create a new linked list instance of the reversed items.
+
+        Get list of items from list.
+        Reverse items.
+        Create a new linked list from reversed items.
+        Return head of newly created reversed linked list.
+
+        - Expensive. Reliant on garbage collection.
         """
         try:
             items = self.get_list(head)
             items.reverse()
 
-            # delete the old list
-            del head 
-
-            # create the new reversed list
             reversed_list = LinkedList(items)
             head = reversed_list.head
 
@@ -110,9 +109,12 @@ class LinkedList:
         """Sort list by node values if values are sortable.
         
         Expensive.
-        We do this by getting the list of items from the linked list.
-        Sort the items, delete the old list instance and
-        create a new linked list instance of the reversed items.
+        Get list of items from list.
+        Sort items.
+        Create a new linked list from sorted items.
+        Return head of newly created sorted linked list.
+
+        - Expensive. Reliant on garbage collection.
         """
 
         try:
@@ -120,10 +122,6 @@ class LinkedList:
                 items = self.get_list(head)
                 items.sort()
 
-                # delete old list
-                del head
-
-                # create the new sorted list
                 sorted_list = LinkedList(items)
                 head = sorted_list.head
 
@@ -141,8 +139,8 @@ class LinkedList:
         """Check if list only contains the head node."""
         try:
             return not self.is_empty(head) and head.next is None
-        except AttributeError:
-            raise AttributeError("Object has no attribute next")
+        except AttributeError as attribute_error:
+            raise attribute_error
 
     def is_homogenuous(self, head):
         """Check if list contains homogoneous values."""
